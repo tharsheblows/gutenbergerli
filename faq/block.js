@@ -8,8 +8,8 @@ const {
 	}
 } = wp.blocks;
 
-registerBlockType( 'gutenbergerli/test', {
-	title: __( 'Gutenbergerli test' ),
+registerBlockType( 'gutenbergerli/faq', {
+	title: __( 'Gutenbergerli faq' ),
 	icon: 'index-card',
 	category: 'layout',
 	attributes: {
@@ -56,6 +56,7 @@ registerBlockType( 'gutenbergerli/test', {
 			// Now we're cooking with gas, let's get into the sticky bits
 			// this first one handles the question.
 			// It's editable so use the Editable component: http://gutenberg-devdoc.surge.sh/blocks/introducing-attributes-and-editable-fields/
+			// Hmmmm how can I add the arrow in here?
 			<div className={ props.className }>
 
 				<Editable
@@ -93,6 +94,7 @@ registerBlockType( 'gutenbergerli/test', {
 	save: props => {
 		const {
 			// the class name entered in the bit on the right. You can set this as a unique value for each block I think
+			// Oh! It also includes the class generated for the block as detailed here: http://gutenberg-devdoc.surge.sh/blocks/applying-styles-with-stylesheets/ so this one will wp-block-gutenbergerli-faq
 			className,
 			attributes: {
 				// the question
@@ -106,8 +108,10 @@ registerBlockType( 'gutenbergerli/test', {
 			// wrap in a div with class="className"
 			// the bit in h4 is the question 
 			// and the bit in the div is the answer
+			// I'm adding in the arrow so it's a little clearer? I am not good at design tbh
 			<div className={ className }>
 				<h4>
+					<div className="arrow">&#9656;</div>
 					{ question }
 				</h4>
 				<div className="answer">

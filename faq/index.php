@@ -6,7 +6,7 @@ add_action( 'enqueue_block_editor_assets', 'gutenbergerli_faq_enqueue_block_edit
 
 function gutenbergerli_faq_enqueue_block_editor_assets() {
 	wp_enqueue_script(
-		'gutenbergerli_faq',
+		'gutenbergerli_faq-editor',
 		plugins_url( 'block.build.js', __FILE__ ),
 		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'underscore' ),
 		filemtime( plugin_dir_path( __FILE__ ) . 'block.build.js' )
@@ -29,4 +29,20 @@ function gutenbergerli_faq_enqueue_block_assets() {
 		array( 'wp-blocks' ),
 		filemtime( plugin_dir_path( __FILE__ ) . 'style.css' )
 	);
+
+	wp_enqueue_script(
+		'gutenbergerli_faq',
+		plugins_url( 'gutenbergerli-faq.js', __FILE__ ),
+		array( 'jquery' ),
+		filemtime( plugin_dir_path( __FILE__ ) . 'gutenbergerli-faq.js' )
+	);
+
+}
+
+add_action( 'wp_head', 'gutenbergerli_faq_head' );
+
+function gutenbergerli_faq_head() {
+	echo '<noscript>';
+	echo '<style> .wp-block-gutenbergerli-faq .answer{ display: block !important; } </style>';
+	echo '</noscript>';
 }
