@@ -1,30 +1,15 @@
 /**
  * Note that these styles are loaded *after* common styles, so that
  * editor-specific styles using the same selectors will take precedence.
+ *
  */
-.wp-block-gutenberg-examples-05-recipe-card-esnext .recipe-image {
-	background: #f1f1f1;
-	float: right;
-	width: 50%;
-	min-height: 100px;
-	text-align: center;
-	z-index: 1;
-	position: relative;
+
+// hey where do these names come from? Is there a naming convention?
+// oh yes, look it's here: http://gutenberg-devdoc.surge.sh/blocks/applying-styles-with-stylesheets/
+// 
+.wp-block-gutenbergerli-faq h4 {
 }
 
-.wp-block-gutenberg-examples-05-recipe-card-esnext .recipe-image button {
-	margin-top: 30px;
-}
+.wp-block-gutenbergerli-faq .answer {
 
-.wp-block-gutenberg-examples-05-recipe-card-esnext .recipe-image button.image-button {
-	margin: 0;
-	padding: 0;
-}
-
-.wp-block-gutenberg-examples-05-recipe-card-esnext h2 {
-	font-size: 1.5em;
-}
-
-.wp-block-gutenberg-examples-05-recipe-card-esnext ul {
-	padding-left: 2.5em !important; /* Needs fix in Gutenberg. */
 }

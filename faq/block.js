@@ -13,115 +13,105 @@ registerBlockType( 'gutenbergerli/test', {
 	icon: 'index-card',
 	category: 'layout',
 	attributes: {
-		title: children( 'h2' ),
-		ingredients: children( 'ul' ),
-		instructions: children( 'div.steps' ),
+		// our faq, like many faqs, will have questions and answers
+		// the question attribute is going to be an h4 element even though I am fairly sure this isn't good
+		question: children( 'h4' ),
+		// the answer attribute will be in a div with class="answer". 
+		answer: children( 'div.answer' ),
 	},
+
+	// this is responsible for the editor side of things in wp-admin when you're making a post
 	edit: props => {
-		const focusedEditable = props.focus ? props.focus.editable || 'title' : null;
+		// focus on the question bit as default
+		const focusedEditable = props.focus ? props.focus.editable || 'question' : null;
+
 		const attributes = props.attributes;
-		const onChangeTitle = value => {
-			props.setAttributes( { title: value } );
-		};
-		const onFocusTitle = focus => {
-			props.setFocus( _.extend( {}, focus, { editable: 'title' } ) );
-		};
-		const onSelectImage = media => {
-			props.setAttributes( {
-				mediaURL: media.url,
-				mediaId: media.id,
-			} );
-		};
-		const onChangeIngredients = value => {
-			props.setAttributes( { ingredients: value } );
-		};
-		const onFocusIngredients = focus => {
-			props.setFocus( _.extend( {}, focus, { editable: 'ingredients' } ) );
-		};
-		const onChangeInstructions = value => {
-			props.setAttributes( { instructions: value } );
-		};
-		const onFocusInstructions = focus => {
-			props.setFocus( _.extend( {}, focus, { editable: 'instructions' } ) );
+
+		// the function which handles what happens when the question is changed
+		const onChangeQuestion = value => {
+			props.setAttributes( { question: value } );
 		};
 
+		// the function which handles what happens when focus is on the question
+		const onFocusQuestion = focus => {
+			props.setFocus( _.extend( {}, focus, { editable: 'question' } ) );
+		};
+
+		// the function which handles what happens when the answer is changed
+		const onChangeAnswer = value => {
+			props.setAttributes( { answer: value } );
+		};
+
+		// the function which handles what happens when focus is on the answer
+		const onFocusAnswer = focus => {
+			props.setFocus( _.extend( {}, focus, { editable: 'answer' } ) );
+		};
+
+
+		// This is the bit that handles rendering in the editor
 		return (
+			// ok so className in React is just class="props.className" which is a user input on the side bit of the screen
+			// one thing to note is that React returns one node only, so if you have multiple nodes, they need to be wrapped in a div or something.
+			
+			// Now we're cooking with gas, let's get into the sticky bits
+			// this first one handles the question.
+			// It's editable so use the Editable component: http://gutenberg-devdoc.surge.sh/blocks/introducing-attributes-and-editable-fields/
 			<div className={ props.className }>
+
 				<Editable
-					tagName="h2"
-					placeholder={ __( 'Write Recipe title…' ) }
-					value={ attributes.title }
-					onChange={ onChangeTitle }
-					focus={ focusedEditable === 'title' }
-					onFocus={ onFocusTitle }
-					/>
-				<div className="recipe-image">
-					<MediaUploadButton
-						buttonProps={
-							{
-								className: attributes.mediaId
-									? 'image-button'
-									: 'components-button button button-large',
-							}
-						}
-						onSelect={ onSelectImage }
-						type="image"
-						value={ attributes.mediaId }
-						>
-						{
-							attributes.mediaId
-								? <img src={ attributes.mediaURL } />
-								: __( 'Upload Image' )
-						}
-					</MediaUploadButton>
-				</div>
+					// it's an h4
+					tagName="h4"
+					placeholder={ __( 'Question:' ) }
+					// the value is whatever the question entered was
+					value={ attributes.question }
+					// when this component changes, run onChangeQuestion (it just sets it to the new question really)
+					onChange={ onChangeQuestion }
+					focus={ focusedEditable === 'question' }
+					onFocus={ onFocusQuestion }
+				/>
+
+				
 				<Editable
-					tagName="ul"
-					multiline="li"
-					placeholder={ __( 'What are the ingredients?' ) }
-					value={ attributes.ingredients }
-					onChange={ onChangeIngredients }
-					focus={ focusedEditable === 'ingredients' }
-					onFocus={ onFocusIngredients }
-					/>
-				<Editable
+					// now for the answer. Again using the Editable component
+					// it's in a div
 					tagName="div"
+					// if there are multiple lines, make them paragraphs
 					multiline="p"
-					className="steps"
-					placeholder={ __( 'Write the instructions…' ) }
-					value={ attributes.instructions }
-					onChange={ onChangeInstructions }
-					focus={ focusedEditable === 'instructions' }
-					onFocus={ onFocusInstructions }
-					/>
+					// the class name is answer (so class="answer")
+					className="answer"
+					placeholder={ __( 'Answer:' ) }
+					value={ attributes.answer }
+					onChange={ onChangeAnswer }
+					focus={ focusedEditable === 'answer' }
+					onFocus={ onFocusAnswer }
+				/>
 			</div>
 		);
 	},
+
+	// Now this is what will save in your database and it's what will be displayed like normal except that this will be in between html comments like <!-- wp:gutenbergli/faq --> <!-- /wp:gutenbergerli/faq -->
 	save: props => {
 		const {
+			// the class name entered in the bit on the right. You can set this as a unique value for each block I think
 			className,
 			attributes: {
-				title,
-				mediaURL,
-				ingredients,
-				instructions
+				// the question
+				question,
+				// the answer
+				answer
 			}
 		} = props;
+		// this is what gets saved, it's fairly straightforward here (looks familiar?) 
 		return (
+			// wrap in a div with class="className"
+			// the bit in h4 is the question 
+			// and the bit in the div is the answer
 			<div className={ className }>
-				<h2>
-					{ title }
-				</h2>
-				{
-					mediaURL && (
-						<img className="recipe-image" src={ mediaURL } />
-					)
-				}
-				<ul>
-					{ ingredients }
-				</ul>
-				<div className="steps">
-					{ instructions }
+				<h4>
+					{ question }
+				</h4>
+				<div className="answer">
+					{ answer }
 				</div>
 			</div>
 		);
