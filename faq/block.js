@@ -128,13 +128,9 @@ registerBlockType( 'gutenbergerli/faq', {
 			<div className={ className } data-id={ id }>
 				<div className="question">
 					<div className="arrow">&#9656;</div>
-					<h4>
-						{ question }
-					</h4>
+					<h4>{ question }</h4>
 				</div>
-				<div className="answer">
-					{ answer }
-				</div>
+				<div className="answer">{ answer }</div>
 			</div>
 		);
 	}

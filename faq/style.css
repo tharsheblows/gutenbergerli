@@ -1,6 +1,11 @@
 
 /* naming convention here: http://gutenberg-devdoc.surge.sh/blocks/applying-styles-with-stylesheets/ */
 
+.wp-block-gutenbergerli-faq {
+	max-width: 700px;
+	margin: 1.2em auto;
+}
+
 /* make the cursor a pointer so it's more obvious that you need to click on it to see the answer */
 .wp-block-gutenbergerli-faq .question{
 	cursor: pointer;
@@ -8,7 +13,8 @@
 
 .wp-block-gutenbergerli-faq .question h4{
 	display: inline-block;
-	padding-top: 0;
+	padding: 0;
+	margin: 0;
 }
 
 /* red arrow whoo! */
@@ -33,4 +39,8 @@
 .wp-block-gutenbergerli-faq .answer{
 	display: none;
 	margin-left: 20px;
+}
+
+.wp-block-gutenbergerli-faq .answer p {
+	margin: 0 0 0.5em 0;
 }
