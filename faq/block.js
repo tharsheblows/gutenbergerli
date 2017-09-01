@@ -1,4 +1,6 @@
 
+const queryString = require('query-string');
+
 const { __ } = wp.i18n;
 const {
 	registerBlockType,
@@ -62,6 +64,11 @@ registerBlockType( 'gutenbergerli/faq', {
 			props.setFocus( _.extend( {}, focus, { editable: 'answer' } ) );
 		};
 
+		const getId = () => {
+			let parsedSearch = queryString.parse(window.location.search);
+			props.setAttributes( { id: parsedSearch.post_id + ':' + props.id } );
+		}
+
 		// This is the bit that handles rendering in the editor
 		// In the Gutenberg plugin, they return an array but I'm going to do it like the Gutenberg examples plugin and wrap it all in a div to return one node
 		// 
@@ -83,7 +90,7 @@ registerBlockType( 'gutenbergerli/faq', {
 					)
 				}
 	
-				<div className={ props.className } data-id={ attributes.id ? attributes.id : props.setAttributes( { id: props.id } ) } key="editor">
+				<div className={ props.className } data-id={ attributes.id ? attributes.id : getId() } key="editor">
 	
 					<Editable
 						tagName="h4"
