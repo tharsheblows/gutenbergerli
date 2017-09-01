@@ -1,4 +1,6 @@
 
+import WasItHelpful from './wasthishelpful.js'; 
+
 const queryString = require('query-string');
 
 const { __ } = wp.i18n;
@@ -112,6 +114,8 @@ registerBlockType( 'gutenbergerli/faq', {
 						focus={ focusedEditable === 'answer' }
 						onFocus={ onFocusAnswer }
 					/>
+
+					<WasItHelpful isPrimary>yesh</WasItHelpful>
 				</div>
 			</div>
 		);
