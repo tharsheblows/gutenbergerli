@@ -115,7 +115,8 @@ registerBlockType( 'gutenbergerli/faq', {
 						onFocus={ onFocusAnswer }
 					/>
 
-					<WasItHelpful isPrimary>yesh</WasItHelpful>
+					// this is going to handle the thumbs up / thumbs down bit
+					<WasItHelpful id = { attributes.id } />
 				</div>
 			</div>
 		);

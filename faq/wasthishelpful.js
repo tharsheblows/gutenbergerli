@@ -1,3 +1,4 @@
+// This contains the "WasItHelpful" component
 
 /**
  * External dependencies
@@ -13,52 +14,31 @@ const {
 class WasItHelpful extends Component {
 	constructor( props ) {
 		super( props );
-		this.setRef = this.setRef.bind( this );
+		this.state = { yes: 0, no: 0 }; // let's not make assumptions about people's preferences
 	}
 
-	componentDidMount() {
-		if ( this.props.focus ) {
-			this.ref.focus();
-		}
+	componentDidMount () {
+		this.getYesAndNo( this.props.id ); // once the component has mounted, figure out how many have found it helpful and how many haven't
 	}
 
-	setRef( ref ) {
-		this.ref = ref;
+	getYesAndNo() {
+		this.setState( { yes: 7, no: 1 } ); // currently it's 7 to 1 and there's nothing you can do about it
 	}
 
 	render() {
-		const {
-			href,
-			target,
-			isPrimary,
-			isSecondary,
-			isLarge,
-			isSmall,
-			isToggled,
-			className,
-			disabled,
-			...additionalProps
-		} = this.props;
-		const classes = classnames( 'components-button', className, {
-			button: ( isPrimary || isSecondary || isLarge ),
-			'button-primary': isPrimary,
-			'button-secondary': isSecondary,
-			'button-large': isLarge,
-			'button-small': isSmall,
-			'is-toggled': isToggled,
-		} );
 
-		const tag = href !== undefined && ! disabled ? 'a' : 'button';
-		const tagProps = tag === 'a' ? { href, target } : { type: 'button', disabled };
+		return (
 
-		delete additionalProps.focus;
-
-		return createElement( tag, {
-			...tagProps,
-			...additionalProps,
-			className: classes,
-			ref: this.setRef,
-		} );
+			<div className="helpfulness">
+				 { __( 'Was this helpful?' ) }
+				 <div className="wasit">
+				 	<a className="yes"><span className="screen-reader-text">Yes!</span><span aria-hidden="true">👍</span></a>
+				 		<span className="number-yes">{ this.state.yes }</span> <span className="screen-reader-text">people think it is helpful.</span>
+				 	<a className="no"><span className="screen-reader-text">No!</span><span aria-hidden="true">👎</span></a>
+				 		<span className="number-no">{ this.state.no }</span> <span className="screen-reader-text">people think it is not helpful.</span>
+				 </div>
+			</div>
+		);
 	}
 }
 

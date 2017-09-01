@@ -44,3 +44,7 @@
 .wp-block-gutenbergerli-faq .answer p {
 	margin: 0 0 0.5em 0;
 }
+
+.wp-block-gutenbergerli-faq .wasit button {
+	margin-left: 1.5em;
+}
