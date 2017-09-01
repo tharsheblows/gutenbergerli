@@ -1,10 +1,13 @@
+
 const { __ } = wp.i18n;
 const {
 	registerBlockType,
 	Editable,
-	MediaUploadButton,
+	InspectorControls, // we are going to use the InspectorControls
+	BlockDescription, // and the BlockDescription
 	source: {
-		children
+		children,
+		attr // the source of one of our attributes is an attribute http://gutenberg-devdoc.surge.sh/reference/attribute-sources/
 	}
 } = wp.blocks;
 
@@ -18,10 +21,13 @@ registerBlockType( 'gutenbergerli/faq', {
 		question: children( 'h4' ),
 		// the answer attribute will be in a div with class="answer". 
 		answer: children( 'div.answer' ),
+		// each block will get its own persistent id which is stored in the data-id attribute. To use attr(), declare it in the source bit above
+		id: attr( 'div.answer', 'data-id' )
 	},
 
 	// this is responsible for the editor side of things in wp-admin when you're making a post
 	edit: props => {
+
 		// focus on the question bit as default
 		const focusedEditable = props.focus ? props.focus.editable || 'question' : null;
 
@@ -47,45 +53,50 @@ registerBlockType( 'gutenbergerli/faq', {
 			props.setFocus( _.extend( {}, focus, { editable: 'answer' } ) );
 		};
 
-
 		// This is the bit that handles rendering in the editor
+		// In the Gutenberg plugin, they return an array but I'm going to do it like the Gutenberg examples plugin and wrap it all in a div to return one node
+		// 
+		// This returns the bit in the right hand sidebar under the Block tab (the <InspectorControls> component) as well as the block for the editor itself (the <Editable> components)
+		// To use the new components, you need to declare them at the top in const { ... } = wp.blocks.
 		return (
-			// ok so className in React is just class="props.className" which is a user input on the side bit of the screen
-			// one thing to note is that React returns one node only, so if you have multiple nodes, they need to be wrapped in a div or something.
-			
-			// Now we're cooking with gas, let's get into the sticky bits
-			// this first one handles the question.
-			// It's editable so use the Editable component: http://gutenberg-devdoc.surge.sh/blocks/introducing-attributes-and-editable-fields/
-			// Hmmmm how can I add the arrow in here?
-			<div className={ props.className }>
 
-				<Editable
-					// it's an h4
-					tagName="h4"
-					placeholder={ __( 'Question:' ) }
-					// the value is whatever the question entered was
-					value={ attributes.question }
-					// when this component changes, run onChangeQuestion (it just sets it to the new question really)
-					onChange={ onChangeQuestion }
-					focus={ focusedEditable === 'question' }
-					onFocus={ onFocusQuestion }
-				/>
-
-				
-				<Editable
-					// now for the answer. Again using the Editable component
-					// it's in a div
-					tagName="div"
-					// if there are multiple lines, make them paragraphs
-					multiline="p"
-					// the class name is answer (so class="answer")
-					className="answer"
-					placeholder={ __( 'Answer:' ) }
-					value={ attributes.answer }
-					onChange={ onChangeAnswer }
-					focus={ focusedEditable === 'answer' }
-					onFocus={ onFocusAnswer }
-				/>
+			<div>
+				{
+					// if this is focused and editable, show this inspector control
+					!! focusedEditable && (
+						<InspectorControls key="inspector">
+							<BlockDescription>
+								<p>{ __( 'The id of this block is:' ) }</p>
+								<p>{ attributes.id }</p>
+								<hr />
+							</BlockDescription>
+						</InspectorControls>
+					)
+				}
+	
+				<div className={ props.className } data-id={ attributes.id ? attributes.id : props.setAttributes( { id: props.id } ) } key="editor">
+	
+					<Editable
+						tagName="h4"
+						placeholder={ __( 'Question:' ) }
+						value={ attributes.question }
+						onChange={ onChangeQuestion }
+						focus={ focusedEditable === 'question' }
+						onFocus={ onFocusQuestion }
+					/>
+	
+					
+					<Editable
+						tagName="div"
+						multiline="p"
+						className="answer"
+						placeholder={ __( 'Answer:' ) }
+						value={ attributes.answer }
+						onChange={ onChangeAnswer }
+						focus={ focusedEditable === 'answer' }
+						onFocus={ onFocusAnswer }
+					/>
+				</div>
 			</div>
 		);
 	},
@@ -93,23 +104,19 @@ registerBlockType( 'gutenbergerli/faq', {
 	// Now this is what will save in your database and it's what will be displayed like normal except that this will be in between html comments like <!-- wp:gutenbergli/faq --> <!-- /wp:gutenbergerli/faq -->
 	save: props => {
 		const {
-			// the class name entered in the bit on the right. You can set this as a unique value for each block I think
-			// Oh! It also includes the class generated for the block as detailed here: http://gutenberg-devdoc.surge.sh/blocks/applying-styles-with-stylesheets/ so this one will wp-block-gutenbergerli-faq
 			className,
 			attributes: {
 				// the question
 				question,
 				// the answer
-				answer
+				answer,
+				// the id
+				id
 			}
 		} = props;
 		// this is what gets saved, it's fairly straightforward here (looks familiar?) 
 		return (
-			// wrap in a div with class="className"
-			// the bit in h4 is the question 
-			// and the bit in the div is the answer
-			// I'm adding in the arrow so it's a little clearer? I am not good at design tbh
-			<div className={ className }>
+			<div className={ className } data-id={ id }>
 				<h4>
 					<div className="arrow">&#9656;</div>
 					{ question }
