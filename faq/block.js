@@ -20,9 +20,9 @@ registerBlockType( 'gutenbergerli/faq', {
 		// the question attribute is going to be an h4 element even though I am fairly sure this isn't good
 		question: children( 'h4' ),
 		// the answer attribute will be in a div with class="answer". 
-		answer: children( 'div.answer' ),
+		answer: children( 'p.answer' ),
 		// each block will get its own persistent id which is stored in the data-id attribute. To use attr(), declare it in the source bit above
-		id: attr( 'div.answer', 'data-id' )
+		id: attr( 'div.wp-block-gutenbergerli-faq', 'data-id' )
 	},
 
 	// this is responsible for the editor side of things in wp-admin when you're making a post
@@ -87,8 +87,7 @@ registerBlockType( 'gutenbergerli/faq', {
 	
 					
 					<Editable
-						tagName="div"
-						multiline="p"
+						tagName="p"
 						className="answer"
 						placeholder={ __( 'Answer:' ) }
 						value={ attributes.answer }
@@ -121,9 +120,9 @@ registerBlockType( 'gutenbergerli/faq', {
 					<div className="arrow">&#9656;</div>
 					{ question }
 				</h4>
-				<div className="answer">
+				<p className="answer">
 					{ answer }
-				</div>
+				</p>
 			</div>
 		);
 	}
