@@ -47,7 +47,6 @@ registerBlockType( 'gutenbergerli/faq', {
 		// the function which handles what happens when the question is changed
 		const onChangeQuestion = value => {
 			props.setAttributes( { question: value } );
-			console.log( props );
 		};
 
 		// the function which handles what happens when focus is on the question
