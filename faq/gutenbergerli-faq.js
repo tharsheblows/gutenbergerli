@@ -43,6 +43,7 @@ jQuery( document ).ready( function( $ ) {
 
 	});
 
+	// don't know what I'm doing here but it's working so hey ho
 	wp.api.loadPromise.done( function() {
 		var post = new wp.api.models.Post( { id: mjjGutenbergerli.postId } );
 		post.fetch({ 

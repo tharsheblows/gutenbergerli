@@ -10,25 +10,19 @@ const queryString = require('query-string');
  *
  * @returns current post id or undefined
  */
-function getPostId() {
+export function getPostId() {
 
 	var postId;
 
 	// do we already have it because it's been localised onto the page?
-	if ( locPostId !== undefined ) {
+	if ( typeof( mjjGutenbergerli.postId ) !== undefined && mjjGutenbergerli.postId !== null  ) {
+		console.log( 'here' );
 		postId = mjjGutenbergerli.postId;
 	} else {
 		let parsedSearch = queryString.parse(window.location.search);
 		postId = parsedSearch.post_id;
 	}
 
-	return post_id;
-
-}
-
-/*
- * @param   {String} clickVote      The data-vote of the click ("helpful" or "unhelpful")
- */
-export function getHelpfulness() {
+	return postId;
 
 }

@@ -5,6 +5,8 @@
  */
 import classnames from 'classnames';
 
+import { getPostId } from './data.js';
+
 const { __ } = wp.i18n;
 
 // ha HA here's how you pick these up. I think that you can use anything you see in @wordpress/whatever by using wp.whatever
@@ -20,11 +22,25 @@ class WasItHelpful extends Component {
 	}
 
 	componentDidMount () {
-		this.getYesAndNo( this.props.id ); // once the component has mounted, figure out how many have found it helpful and how many haven't
-	}
-
-	getYesAndNo() {
-		this.setState( { yes: 7, no: 1 } ); // currently it's 7 to 1 and there's nothing you can do about it
+		var help;
+		var _this = this;
+		var postId = getPostId();
+		var blockId = this.props.id;
+	
+		if ( postId === undefined ){
+			this.setState( { yes: 0, no: 0 } );
+		}
+	
+		// ha I don't know backbone or what I'm doing here
+		wp.api.loadPromise.done( function() {
+	
+			var post = new wp.api.models.Post( { id: postId } );
+			post.fetch().done( () => {
+				var helpfulness = JSON.parse( post.attributes.helpfulness );
+				_this.setState({yes: helpfulness[blockId]["helpful"], no: helpfulness[blockId]["unhelpful"]});
+				
+			});
+		});
 	}
 
 	render() {

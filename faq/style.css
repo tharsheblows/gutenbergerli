@@ -45,6 +45,19 @@
 	margin: 0 0 0.5em 0;
 }
 
-.wp-block-gutenbergerli-faq .wasit button {
-	margin-left: 1.5em;
+.wp-block-gutenbergerli-faq .wasit a {
+	border: 1px dotted red;
+	background: #666666;
+	padding: 2px 5px; 
+	margin: 0 0.25em 0 2.5em;
+}
+
+.wp-block-gutenbergerli-faq .wasit a:hover{
+	border: 1px solid red;
+	background: #999999;
+}
+
+.wp-block-gutenbergerli-faq .wasit a:active{
+	border: 1px solid yellow;
+	background: #333333;
 }

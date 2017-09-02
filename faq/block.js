@@ -140,7 +140,7 @@ registerBlockType( 'gutenbergerli/faq', {
 					<h4>{ question }</h4>
 				</div>
 				<div className="answer">{ answer }</div>
-				<WasItHelpful />
+				<WasItHelpful id={ id } />
 			</div>
 		);
 	}
