@@ -47,11 +47,15 @@ registerBlockType( 'gutenbergerli/faq', {
 		// the function which handles what happens when the question is changed
 		const onChangeQuestion = value => {
 			props.setAttributes( { question: value } );
+			console.log( props );
 		};
 
 		// the function which handles what happens when focus is on the question
 		const onFocusQuestion = focus => {
 			props.setFocus( _.extend( {}, focus, { editable: 'question' } ) );
+			if ( attributes.id === undefined ) {
+				props.setAttributes( { id: props.id } ); // the first time the question has focus, attributes.id is set
+			}
 		};
 
 		// the function which handles what happens when the answer is changed
@@ -63,11 +67,6 @@ registerBlockType( 'gutenbergerli/faq', {
 		const onFocusAnswer = focus => {
 			props.setFocus( _.extend( {}, focus, { editable: 'answer' } ) );
 		};
-
-		const getId = () => {
-			let parsedSearch = queryString.parse(window.location.search);
-			props.setAttributes( { id: parsedSearch.post_id + ':' + props.id } );
-		}
 
 		// This is the bit that handles rendering in the editor
 		// In the Gutenberg plugin, they return an array but I'm going to do it like the Gutenberg examples plugin and wrap it all in a div to return one node
@@ -90,7 +89,7 @@ registerBlockType( 'gutenbergerli/faq', {
 					)
 				}
 	
-				<div className={ props.className } data-id={ attributes.id ? attributes.id : getId() } key="editor">
+				<div className={ props.className } data-id={ attributes.id } key="editor">
 	
 					<Editable
 						tagName="h4"
