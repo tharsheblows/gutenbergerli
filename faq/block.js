@@ -1,7 +1,5 @@
 
-import WasItHelpful from './wasthishelpful.js'; 
-
-const queryString = require('query-string');
+import WasItHelpful from './wasthishelpful.js';
 
 const { __ } = wp.i18n;
 const {
@@ -142,6 +140,7 @@ registerBlockType( 'gutenbergerli/faq', {
 					<h4>{ question }</h4>
 				</div>
 				<div className="answer">{ answer }</div>
+				<WasItHelpful />
 			</div>
 		);
 	}

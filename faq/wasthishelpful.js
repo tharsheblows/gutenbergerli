@@ -6,6 +6,8 @@
 import classnames from 'classnames';
 
 const { __ } = wp.i18n;
+
+// ha HA here's how you pick these up. I think that you can use anything you see in @wordpress/whatever by using wp.whatever
 const {
 	Component,
 	createElement,
@@ -32,9 +34,9 @@ class WasItHelpful extends Component {
 			<div className="helpfulness">
 				 { __( 'Was this helpful?' ) }
 				 <div className="wasit">
-				 	<a className="yes"><span className="screen-reader-text">Yes!</span><span aria-hidden="true">👍</span></a>
+				 	<a className="yes" data-vote="helpful"><span className="screen-reader-text">Yes!</span><span aria-hidden="true">👍</span></a>
 				 		<span className="number-yes">{ this.state.yes }</span> <span className="screen-reader-text">people think it is helpful.</span>
-				 	<a className="no"><span className="screen-reader-text">No!</span><span aria-hidden="true">👎</span></a>
+				 	<a className="no" data-vote="unhelpful"><span className="screen-reader-text">No!</span><span aria-hidden="true">👎</span></a>
 				 		<span className="number-no">{ this.state.no }</span> <span className="screen-reader-text">people think it is not helpful.</span>
 				 </div>
 			</div>
