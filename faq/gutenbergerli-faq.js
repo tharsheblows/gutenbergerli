@@ -5,6 +5,7 @@ jQuery( document ).ready( function( $ ) {
 		
 		var entry = $( this ).parent();
 		$( entry ).find( '.answer' ).slideToggle();
+		$( entry ).find( '.helpfulness' ).slideToggle();
 		$( entry ).find( '.arrow' ).toggleClass( 'rotated' );
 	});
 

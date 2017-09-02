@@ -16,6 +16,6 @@
 	color: #ff0000;
 }
 
-.wp-block-gutenbergerli-faq .answer {
+.wp-block-gutenbergerli-faq .answer, .wp-block-gutenbergerli-faq .helpfulness {
 	display: block;
 }
