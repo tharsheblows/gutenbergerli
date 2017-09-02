@@ -74,6 +74,8 @@ registerBlockType( 'gutenbergerli/faq', {
 		// 
 		// This returns the bit in the right hand sidebar under the Block tab (the <InspectorControls> component) as well as the block for the editor itself (the <Editable> components)
 		// To use the new components, you need to declare them at the top in const { ... } = wp.blocks.
+		// 
+		// WasItHelpful adds the thumbs up / thumbs down functionality
 		return (
 
 			<div>
@@ -113,7 +115,6 @@ registerBlockType( 'gutenbergerli/faq', {
 						onFocus={ onFocusAnswer }
 					/>
 
-					// this is going to handle the thumbs up / thumbs down bit
 					<WasItHelpful id = { attributes.id } />
 				</div>
 			</div>
