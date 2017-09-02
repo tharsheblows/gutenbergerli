@@ -48,12 +48,11 @@ class WasItHelpful extends Component {
 		return (
 
 			<div className="helpfulness">
-				 { __( 'Was this helpful?' ) }
+				 <div className="wasitquestion">{ __( 'Was this helpful?' ) }</div>
 				 <div className="wasit">
-				 	<a className="yes" data-vote="helpful"><span className="screen-reader-text">Yes!</span><span aria-hidden="true">👍</span></a>
-				 		<span className="number-yes">{ this.state.yes }</span> <span className="screen-reader-text">people think it is helpful.</span>
-				 	<a className="no" data-vote="unhelpful"><span className="screen-reader-text">No!</span><span aria-hidden="true">👎</span></a>
-				 		<span className="number-no">{ this.state.no }</span> <span className="screen-reader-text">people think it is not helpful.</span>
+				 	<a className="yes" data-vote="helpful"><span className="screen-reader-text">Yes!</span><span aria-hidden="true">👍</span> <span className="number-yes">{ this.state.yes }</span> <span className="screen-reader-text">people think it is helpful.</span></a>	
+				 	<a className="no" data-vote="unhelpful"><span className="screen-reader-text">No!</span><span aria-hidden="true">👎</span> <span className="number-no">{ this.state.no }</span> <span className="screen-reader-text">people think it is not helpful.</span></a>
+				 		
 				 </div>
 			</div>
 		);

@@ -43,6 +43,9 @@ jQuery( document ).ready( function( $ ) {
 
 	});
 
+	// sigh empty paragraph tags. let's remove them
+	$('p:empty').remove();
+
 	// don't know what I'm doing here but it's working so hey ho
 	wp.api.loadPromise.done( function() {
 		var post = new wp.api.models.Post( { id: mjjGutenbergerli.postId } );

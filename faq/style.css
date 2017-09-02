@@ -4,6 +4,8 @@
 .wp-block-gutenbergerli-faq {
 	max-width: 700px;
 	margin: 1.2em auto;
+	background: #F2F2F2;
+	padding: 1em;
 }
 
 /* make the cursor a pointer so it's more obvious that you need to click on it to see the answer */
@@ -26,7 +28,7 @@
 	transition: transform .2s;
 }
 
-.rotated { 
+.wp-block-gutenbergerli-faq .rotated { 
 	-webkit-transform: rotate(90deg);
 	-moz-transform: rotate(90deg);
 	-o-transform: rotate(90deg);
@@ -34,6 +36,21 @@
 	transform: rotate(90deg);
 	-webkit-transition: -webkit-transform .2s;
 	transition: transform .2s;
+}
+
+.wp-block-gutenbergerli-faq p{
+	margin: 0 auto;
+}
+
+.wp-block-gutenbergerli-faq .helpfulness{
+	padding: 10px;
+	font-size: 85%;
+	margin: 2px 2px 5px 2px;
+	background: #FFFFFF;
+}
+
+.wp-block-gutenbergerli-faq .wasitquestion{
+	float: left;
 }
 
 .wp-block-gutenbergerli-faq .answer{
@@ -46,18 +63,28 @@
 }
 
 .wp-block-gutenbergerli-faq .wasit a {
-	border: 1px dotted red;
-	background: #666666;
+	box-shadow:	0 0 1px #999;
+	background: #f7f7f7;
 	padding: 2px 5px; 
-	margin: 0 0.25em 0 2.5em;
+	margin: 0 0.25em 0 2em;
+	cursor: pointer;
 }
 
 .wp-block-gutenbergerli-faq .wasit a:hover{
-	border: 1px solid red;
+	box-shadow:	0 0 1px #333;
 	background: #999999;
 }
 
 .wp-block-gutenbergerli-faq .wasit a:active{
-	border: 1px solid yellow;
+	box-shadow:	0 0 1px #000;
 	background: #333333;
+}
+
+.wp-block-gutenbergerli-faq .wasit .number-no, .wp-block-gutenbergerli-faq .wasit .number-yes{
+	font-size: 90%;
+	color: #666;
+}
+
+.wp-block-gutenbergerli-faq .wasit a:hover .number-no, .wp-block-gutenbergerli-faq .wasit a:hover .number-yes{
+	color: white;
 }
