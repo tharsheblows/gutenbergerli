@@ -10,7 +10,7 @@ Currently the only block is Gutenbergerli faq. To use, simply download and insta
 
 ### Gutenbergerli faq
 
-This a block which contains the question and answer as well as a field for users to upvote or downvote the entry on the frontend. 
+This is a block which contains the question and answer as well as a field for users to upvote or downvote the entry on the frontend. 
 
 ![Screen shot of three Gutenbergerli blocks](https://github.com/tharsheblows/gutenbergerli/blob/master/screenshots/gutenbergerli-faq.png)
 
