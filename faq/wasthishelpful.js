@@ -36,7 +36,7 @@ class WasItHelpful extends Component {
 	
 			var post = new wp.api.models.Post( { id: postId } );
 			post.fetch().done( () => {
-				var helpfulness = JSON.parse( post.attributes.helpfulness );
+				var helpfulness = post.attributes.helpfulness;
 				_this.setState({yes: helpfulness[blockId]["helpful"], no: helpfulness[blockId]["unhelpful"]});
 				
 			});
@@ -52,7 +52,6 @@ class WasItHelpful extends Component {
 				 <div className="wasit">
 				 	<a className="yes" data-vote="helpful"><span className="screen-reader-text">Yes!</span><span aria-hidden="true">👍</span> <span className="number-yes">{ this.state.yes }</span> <span className="screen-reader-text">people think it is helpful.</span></a>	
 				 	<a className="no" data-vote="unhelpful"><span className="screen-reader-text">No!</span><span aria-hidden="true">👎</span> <span className="number-no">{ this.state.no }</span> <span className="screen-reader-text">people think it is not helpful.</span></a>
-				 		
 				 </div>
 			</div>
 		);

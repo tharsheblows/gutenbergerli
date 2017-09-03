@@ -32,7 +32,6 @@ jQuery( document ).ready( function( $ ) {
 			success: function( data, textStatus, jqXHR ) {
 				var reply = JSON.parse( data );
 				if ( reply.result == 'succeed' ) {
-					console.log( reply );
 					$( '.wp-block-gutenbergerli-faq[data-id="' + blockId + '"] .wasit span.number-yes' ).html( reply["helpfulnessJson"][blockId]["helpful"] );
 					$( '.wp-block-gutenbergerli-faq[data-id="' + blockId + '"] .wasit span.number-no' ).html( reply["helpfulnessJson"][blockId]["unhelpful"] );
 				}
@@ -55,7 +54,7 @@ jQuery( document ).ready( function( $ ) {
 				// Callback triggered only after receiving the data.
 				
 				var helpfulness = post.attributes.helpfulness;
-				$.each( JSON.parse( helpfulness ), function( key, value ){
+				$.each( helpfulness, function( key, value ){
 					$( '.wp-block-gutenbergerli-faq[data-id="' + key + '"] .wasit span.number-yes' ).html( value.helpful );
 					$( '.wp-block-gutenbergerli-faq[data-id="' + key + '"] .wasit span.number-no' ).html( value.unhelpful );
 				});

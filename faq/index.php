@@ -85,10 +85,10 @@ function gutenbergerli_faq_helpfulness() {
 	}
 
 	$helpfulness_value = get_post_meta( (int) $post_id, 'helpfulness', true );
-	$helpfulness_json = json_decode( $helpfulness_value );
+	$helpfulness_json = $helpfulness_value;
 
-	$helpful_votes = $helpfulness_json->$block_id->helpful;
-	$unhelpful_votes = $helpfulness_json->$block_id->unhelpful;
+	$helpful_votes = ! empty( $helpfulness_json->$block_id || $helpfulness_json->$block_id->helpful ) ? $helpfulness_json->$block_id->helpful : 0;
+	$unhelpful_votes = ! empty( $helpfulness_json->$block_id || $helpfulness_json->$block_id->unhelpful ) ? $helpfulness_json->$block_id->unhelpful : 0;
 
 	if ( 'helpful' === $helpfulness ) {
 		$helpfulness_json->$block_id->helpful = $helpful_votes + 1;
@@ -96,7 +96,7 @@ function gutenbergerli_faq_helpfulness() {
 		$helpfulness_json->$block_id->unhelpful = $unhelpful_votes + 1;
 	}
 
-	$updated = empty( update_post_meta( (int) $post_id, 'helpfulness', json_encode( $helpfulness_json ) ) ) ? 'fail' : 'succeed';
+	$updated = empty( update_post_meta( (int) $post_id, 'helpfulness', $helpfulness_json ) ) ? 'fail' : 'succeed';
 
 	echo json_encode( array( 'result' => $updated, 'helpfulnessJson' => $helpfulness_json ) );
 	die();
