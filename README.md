@@ -14,7 +14,7 @@ This a block which contains the question and answer as well as a field for users
 
 ![Screen shot of three Gutenbergerli blocks](https://github.com/tharsheblows/gutenbergerli/blob/master/screenshots/gutenbergerli-faq.png)
 
-Use is, I hope, fairly self evident. Put your question in the question field, your answer in the answer field and it's done. The up/downvote bit appears automatically and keeps track of click in a postmeta entry with the meta key "helpfulness". The answer and voting bit are initially hidden on the front end; you initially see a list of questions on page load (unless javascript is disabled and then everything shows except voting won't work).
+Use is, I hope, fairly self evident. In the Gutenberg editor, choose the Gutenbergerli faq block then put your question in the question field, your answer in the answer field and it's done. The up/downvote bit appears automatically and keeps track of clicks made on the front end in a postmeta entry with the meta key "helpfulness". The answer and voting bit are initially hidden on the front end; you initially see a list of questions on page load (unless javascript is disabled and then everything shows except voting won't work).
 
 This is meant to be a demo of adding postmeta content to a post. The votes are stored in postmeta like this:
 
