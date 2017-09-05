@@ -27,6 +27,8 @@ function gutenbergerli_faq_enqueue_block_assets() {
 	// I'm going to get the post id
 	global $post;
 
+	$post_id = ! empty( $post->ID ) ? (int) $post->ID : ( ! empty( $_GET['post_id'] ) ? (int) $_GET['post_id'] : 0 );
+
 	wp_enqueue_style(
 		'gutenbergerli_faq',
 		plugins_url( 'style.css', __FILE__ ),
@@ -45,7 +47,7 @@ function gutenbergerli_faq_enqueue_block_assets() {
 		'gutenbergerli_faq',
 		'mjjGutenbergerli',
 		array(
-			'postId' => $post->ID,
+			'postId' => $post_id,
 			'helpfulnessNonce' => wp_create_nonce( 'helpfulness_nonce_' . $post->ID ),
 		)
 	);

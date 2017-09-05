@@ -13,3 +13,4 @@
 defined( 'ABSPATH' ) || exit;
 
 include 'faq/index.php';
+include 'faq-cpt/index.php';
