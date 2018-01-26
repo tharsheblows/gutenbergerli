@@ -47,6 +47,7 @@ function gutenbergerli_faq_enqueue_block_assets() {
 		'gutenbergerli_faq',
 		'mjjGutenbergerli',
 		array(
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			'postId' => $post_id,
 			'helpfulnessNonce' => wp_create_nonce( 'helpfulness_nonce_' . $post->ID ),
 		)

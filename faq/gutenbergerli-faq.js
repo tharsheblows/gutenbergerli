@@ -26,7 +26,7 @@ jQuery( document ).ready( function( $ ) {
 		}
 
 		$.ajax({
-			url : ajaxurl,
+			url : mjjGutenbergerli.ajaxurl,
 			type: "POST",
 			data: helpfulnessData,
 			success: function( data, textStatus, jqXHR ) {
